@@ -1,4 +1,4 @@
-package demo;
+package user;
 
 import java.sql.Date;
 
@@ -12,7 +12,8 @@ public class User {
 	@Id
 	@GeneratedValue
 	Long id;
-
+	
+	String emailAddress;
 	String userName;
 	String firstName;
 	String lastName;
@@ -27,6 +28,14 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
 
 	public String getUserName() {

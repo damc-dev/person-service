@@ -1,4 +1,6 @@
-package demo;
+package user;
+
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -34,6 +36,9 @@ public class UserController {
 	@ResponseBody
 	public User createUser(@RequestBody User user) {
 		System.out.println("Saved: " + user.toString());
+		user.setCreatedDate(new java.sql.Date(new java.util.Date().getTime()));
+		user.setLastAccessed(new java.sql.Date(new java.util.Date().getTime()));
+		user.setIsActive(true);
 		return repository.save(user);
 	}
 
