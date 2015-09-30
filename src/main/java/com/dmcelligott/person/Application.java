@@ -10,7 +10,6 @@ public class Application {
 	private final static Logger logger = LoggerFactory.getLogger(Application.class);
 	
     public static void main(String[] args) {
-    	logger.info("Pre-start");
         SpringApplication.run(Application.class, args);
     }
 }

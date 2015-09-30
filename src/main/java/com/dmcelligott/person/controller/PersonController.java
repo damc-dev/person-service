@@ -23,39 +23,37 @@ import com.dmcelligott.person.service.PersonServiceException;
 public class PersonController {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
-
 	
 	@Autowired
 	private PersonService service;
 
 	@RequestMapping(method = { RequestMethod.GET }, produces = "application/json")
 	@ResponseBody
-	public ResponseEntity<Iterable<Person>> listUsers() {
+	public ResponseEntity<Iterable<Person>> listPeople() {
 		return new ResponseEntity<Iterable<Person>>(service.findAll(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET }, produces = "application/json")
 	@ResponseBody
-	public ResponseEntity<Person> getUser(@PathVariable Long id) {
-		Person foundUser = service.findOne(id);
-		if (foundUser == null) {
+	public ResponseEntity<Person> getPerson(@PathVariable Long id) {
+		Person foundPerson = service.findOne(id);
+		if (foundPerson == null) {
 			return new ResponseEntity<Person>(HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<Person>(foundUser, HttpStatus.OK);
+			return new ResponseEntity<Person>(foundPerson, HttpStatus.OK);
 		}
 	}
 
 	@RequestMapping(method = {
 			RequestMethod.POST }, headers = "Accept=application/json", produces = "application/json", consumes = "application/json")
 	@ResponseBody
-	public ResponseEntity<Person> createUser(@RequestBody Person person) {
+	public ResponseEntity<Person> createPerson(@RequestBody Person person) {
 		person.setCreatedDate(new java.sql.Date(new java.util.Date().getTime()));
 		person.setLastAccessed(new java.sql.Date(new java.util.Date().getTime()));
-		person.setIsActive(true);
 		try {
 			return new ResponseEntity<Person>(service.save(person), HttpStatus.CREATED);
 		} catch (PersonServiceException e) {
-			logger.error("Failed to create user: " + person.toString(), e);
+			logger.error("Failed to save person: " + person.toString(), e);
 			return new ResponseEntity<Person>(HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 	}

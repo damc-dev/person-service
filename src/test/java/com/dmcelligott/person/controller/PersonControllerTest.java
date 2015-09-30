@@ -40,18 +40,14 @@ public class PersonControllerTest {
 	}
 
 	@Test
-	public void findUserByEmailAddress_emailAddressExists_shouldReturnUser() throws Exception {
-	
-	
-	}
+	public void createPerso_personIsValid_shouldReturnCreatedPerson() {
+		Person person = new PersonBuilder().userId(1L).firstName("Bob")
+				.lastName("Smith").build();
 
-	@Test
-	public void createUser_userIsValid_shouldReturnCreatedUser() {
-		Person person = new PersonBuilder().userName("bob123").emailAddress("bob@example.com").firstName("Bob")
-				.lastName("Smith").isActive(null).build();
-
-		ResponseEntity<Person> response = template.postForEntity(base.toString() + "/user", person, Person.class);
-		Assert.assertThat(response.getStatusCode(), Matchers.equalTo(HttpStatus.CREATED));
+		ResponseEntity<Person> response = template.postForEntity(
+				base.toString() + "/user", person, Person.class);
+		Assert.assertThat(response.getStatusCode(),
+				Matchers.equalTo(HttpStatus.CREATED));
 
 	}
 

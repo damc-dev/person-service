@@ -1,7 +1,5 @@
 package com.dmcelligott.person.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +14,7 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public Person save(Person person) throws PersonServiceException {
-		if (!repository.findByUserName(person.getUserName()).isEmpty()) {
-			throw new PersonServiceException("The username specified already exists");
-		} else {
-			System.out.println("Saved: " + person.toString());
-			return repository.save(person);
-		}
+		return repository.save(person);
 	}
 
 	@Override
@@ -33,10 +26,4 @@ public class PersonServiceImpl implements PersonService {
 	public Person findOne(Long id) {
 		return repository.findOne(id);
 	}
-
-	@Override
-	public List<Person> findByUserName(String userName) {
-		return repository.findByUserName(userName);
-	}
-
 }

@@ -10,5 +10,5 @@ import com.dmcelligott.person.model.Person;
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
-	List<Person> findByUserName(String userName);
+	List<Person> findByLastName(String lastName);
 }
