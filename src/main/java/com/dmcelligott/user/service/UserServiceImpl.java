@@ -1,12 +1,12 @@
-package user.service;
+package com.dmcelligott.user.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import user.dao.UserRepository;
-import user.model.User;
+import com.dmcelligott.user.dao.UserRepository;
+import com.dmcelligott.user.model.User;
 
 @Service
 public class UserServiceImpl implements UserService {

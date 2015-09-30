@@ -1,5 +1,14 @@
+admin-server:
+  image: damcdev/admin-server
+  volumes:
+    - ./admin-server:/data
+  ports:
+    - "5555:8080"
+
 user-service:
   image: damcdev/user-service
+  volumes:
+    - ./user-service:/data 
   ports:
     - "8080:8080"
   env_file: ./example.env

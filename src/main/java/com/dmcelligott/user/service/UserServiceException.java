@@ -1,4 +1,4 @@
-package user.service;
+package com.dmcelligott.user.service;
 
 public class UserServiceException extends Exception {
 

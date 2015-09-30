@@ -1,8 +1,8 @@
-package user.service;
+package com.dmcelligott.user.service;
 
 import java.util.List;
 
-import user.model.User;
+import com.dmcelligott.user.model.User;
 
 public interface UserService {
 	

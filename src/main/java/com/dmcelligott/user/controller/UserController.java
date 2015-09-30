@@ -1,5 +1,7 @@
-package user.controller;
+package com.dmcelligott.user.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -11,17 +13,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import user.model.User;
-import user.service.UserService;
-import user.service.UserServiceException;
+import com.dmcelligott.user.model.User;
+import com.dmcelligott.user.service.UserService;
+import com.dmcelligott.user.service.UserServiceException;
 
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/user")
 public class UserController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+	
 	@Autowired
-	UserService service;
+	private UserService service;
 
 	@RequestMapping(method = { RequestMethod.GET }, produces = "application/json")
 	@ResponseBody
@@ -50,6 +55,7 @@ public class UserController {
 		try {
 			return new ResponseEntity<User>(service.save(user), HttpStatus.CREATED);
 		} catch (UserServiceException e) {
+			logger.error("Failed to create user: " + user.toString(), e);
 			return new ResponseEntity<User>(HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 	}

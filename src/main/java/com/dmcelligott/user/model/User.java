@@ -1,4 +1,4 @@
-package user.model;
+package com.dmcelligott.user.model;
 
 import java.sql.Date;
 
@@ -11,17 +11,31 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	Long id;
-	
-	String emailAddress;
-	String userName;
-	String firstName;
-	String lastName;
-	Date createdDate;
-	Date lastAccessed;
-	
-	Boolean isActive = Boolean.TRUE;
-	
+	private Long id;
+
+	private String emailAddress;
+	private String userName;
+	private String firstName;
+	private String lastName;
+	private Date createdDate;
+	private Date lastAccessed;
+
+	private Boolean isActive = Boolean.TRUE;
+
+	public User() {
+	}
+
+	protected User(UserBuilder builder) {
+		this.id = builder.id;
+		this.emailAddress = builder.emailAddress;
+		this.userName = builder.userName;
+		this.firstName = builder.firstName;
+		this.lastName = builder.lastName;
+		this.createdDate = builder.createdDate;
+		this.lastAccessed = builder.lastAccessed;
+		this.isActive = builder.isActive;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -85,13 +99,11 @@ public class User {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", createdDate="
-				+ createdDate + ", lastAccessed=" + lastAccessed
-				+ ", isActive=" + isActive + "]";
+		return "User [id=" + id + ", emailAddress=" + emailAddress + ", userName=" + userName + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", createdDate=" + createdDate + ", lastAccessed="
+				+ lastAccessed + ", isActive=" + isActive + "]";
 	}
-	
 }
