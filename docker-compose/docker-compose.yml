@@ -6,9 +6,9 @@ admin-server:
     - "5555:8080"
 
 user-service:
-  image: damcdev/user-service
+  image: damcdev/person-service
   volumes:
-    - ./user-service:/data 
+    - ./person-service:/data 
   ports:
     - "8080:8080"
   env_file: ./example.env
