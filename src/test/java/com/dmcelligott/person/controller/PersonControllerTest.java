@@ -1,10 +1,16 @@
 package com.dmcelligott.person.controller;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.*;
+
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,8 +37,19 @@ public class PersonControllerTest {
 	private int port;
 
 	private URL base;
+	private static final String PERSON_PATH = "/person";
+	
 	private RestTemplate template;
 
+	private Person person1 = new PersonBuilder().userId(1L).firstName("Bob")
+			.lastName("Smith").build();
+	
+	private Person person2 = new PersonBuilder().userId(1L).firstName("Joe")
+			.lastName("Shmoe").build();
+
+	private Person person3 = new PersonBuilder().userId(1L).firstName("John")
+			.lastName("Johnson").build();
+	
 	@Before
 	public void setUp() throws Exception {
 		this.base = new URL("http://localhost:" + port + "/");
@@ -40,15 +57,43 @@ public class PersonControllerTest {
 	}
 
 	@Test
-	public void createPerso_personIsValid_shouldReturnCreatedPerson() {
-		Person person = new PersonBuilder().userId(1L).firstName("Bob")
-				.lastName("Smith").build();
-
-		ResponseEntity<Person> response = template.postForEntity(
-				base.toString() + "/user", person, Person.class);
-		Assert.assertThat(response.getStatusCode(),
-				Matchers.equalTo(HttpStatus.CREATED));
-
+	public void getPeople_whenPeopleExist_shouldReturnListOfPeople() {
+		createPerson(person1);
+		createPerson(person2);
+		
+		ResponseEntity<Person[]> response = template.getForEntity(base.toString() + PERSON_PATH, Person[].class);
+		List<Person> people = Arrays.asList(response.getBody());
+		
+		assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+		assertThat(people.size(), Matchers.greaterThanOrEqualTo(2));
+		assertThat(people.get(0).getId(), equalTo(1L));
+		assertThat(people.get(0).getFirstName(), equalTo("Bob"));
+	}
+	
+	@Test
+	public void getPerson_whenPersonExists_shouldReturnPerson() throws Exception {
+		createPerson(person1);
+		createPerson(person2);
+		
+		ResponseEntity<Person> response = template.getForEntity(base.toString() + PERSON_PATH + "/2", Person.class);
+		assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+		
+		Person person = response.getBody();
+		assertThat(person.getId(), equalTo(2L));
+	}
+	
+	@Test
+	public void createPerson_whenPersonIsValid_shouldReturnCreatedPerson() {
+		
+		ResponseEntity<Person> response = createPerson(person3 );
+		
+		assertThat(response.getStatusCode(),
+				equalTo(HttpStatus.CREATED));
 	}
 
+	private ResponseEntity<Person> createPerson(Person person) {
+		ResponseEntity<Person> response = template.postForEntity(
+				base.toString() + PERSON_PATH, person, Person.class);
+		return response;
+	}
 }
