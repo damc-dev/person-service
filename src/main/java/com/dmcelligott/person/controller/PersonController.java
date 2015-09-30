@@ -19,7 +19,7 @@ import com.dmcelligott.person.service.PersonServiceException;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/user")
+@RequestMapping("/person")
 public class PersonController {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonController.class);

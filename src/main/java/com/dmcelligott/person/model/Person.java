@@ -13,6 +13,7 @@ public class Person {
 	@GeneratedValue
 	private Long id;
 
+	private Long userId;
 	private String firstName;
 	private String lastName;
 	private Date createdDate;
@@ -23,6 +24,7 @@ public class Person {
 
 	protected Person(PersonBuilder builder) {
 		this.id = builder.id;
+		this.userId = builder.userId;
 		this.firstName = builder.firstName;
 		this.lastName = builder.lastName;
 		this.createdDate = builder.createdDate;
@@ -35,6 +37,14 @@ public class Person {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getFirstName() {
