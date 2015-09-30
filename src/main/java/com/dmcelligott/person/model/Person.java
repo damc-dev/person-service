@@ -1,4 +1,4 @@
-package com.dmcelligott.user.model;
+package com.dmcelligott.person.model;
 
 import java.sql.Date;
 
@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class Person {
 
 	@Id
 	@GeneratedValue
@@ -22,10 +22,10 @@ public class User {
 
 	private Boolean isActive = Boolean.TRUE;
 
-	public User() {
+	public Person() {
 	}
 
-	protected User(UserBuilder builder) {
+	protected Person(PersonBuilder builder) {
 		this.id = builder.id;
 		this.emailAddress = builder.emailAddress;
 		this.userName = builder.userName;

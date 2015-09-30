@@ -1,4 +1,4 @@
-package com.dmcelligott.user;
+package com.dmcelligott.person;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,12 +6,12 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.dmcelligott.user.UserServiceApplication;
+import com.dmcelligott.person.Application;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = UserServiceApplication.class)
+@SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class UserServiceApplicationTests {
+public class ApplicationTests {
 
 	@Test
 	public void contextLoads() {

@@ -1,4 +1,4 @@
-package com.dmcelligott.user.controller;
+package com.dmcelligott.person.controller;
 
 import java.net.URL;
 
@@ -17,15 +17,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
-import com.dmcelligott.user.UserServiceApplication;
-import com.dmcelligott.user.model.User;
-import com.dmcelligott.user.model.UserBuilder;
+import com.dmcelligott.person.Application;
+import com.dmcelligott.person.model.Person;
+import com.dmcelligott.person.model.PersonBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = UserServiceApplication.class)
+@SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest({ "server.port=0" })
-public class UserControllerTest {
+public class PersonControllerTest {
 
 	@Value("${local.server.port}")
 	private int port;
@@ -47,10 +47,10 @@ public class UserControllerTest {
 
 	@Test
 	public void createUser_userIsValid_shouldReturnCreatedUser() {
-		User user = new UserBuilder().userName("bob123").emailAddress("bob@example.com").firstName("Bob")
+		Person person = new PersonBuilder().userName("bob123").emailAddress("bob@example.com").firstName("Bob")
 				.lastName("Smith").isActive(null).build();
 
-		ResponseEntity<User> response = template.postForEntity(base.toString() + "/user", user, User.class);
+		ResponseEntity<Person> response = template.postForEntity(base.toString() + "/user", person, Person.class);
 		Assert.assertThat(response.getStatusCode(), Matchers.equalTo(HttpStatus.CREATED));
 
 	}

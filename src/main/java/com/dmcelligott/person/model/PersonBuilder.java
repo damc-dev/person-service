@@ -1,8 +1,8 @@
-package com.dmcelligott.user.model;
+package com.dmcelligott.person.model;
 
 import java.sql.Date;
 
-public class UserBuilder {
+public class PersonBuilder {
 	protected Long id;
 	protected String emailAddress;
 	protected String userName;
@@ -12,50 +12,50 @@ public class UserBuilder {
 	protected Date lastAccessed;
 	protected Boolean isActive = Boolean.TRUE;
 
-	public UserBuilder() {
+	public PersonBuilder() {
 	}
 
-	public UserBuilder id(Long id) {
+	public PersonBuilder id(Long id) {
 		this.id = id;
 		return this;
 	}
 
-	public UserBuilder emailAddress(String emailAddress) {
+	public PersonBuilder emailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 		return this;
 	}
 
-	public UserBuilder userName(String userName) {
+	public PersonBuilder userName(String userName) {
 		this.userName = userName;
 		return this;
 	}
 
-	public UserBuilder firstName(String firstName) {
+	public PersonBuilder firstName(String firstName) {
 		this.firstName = firstName;
 		return this;
 	}
 
-	public UserBuilder lastName(String lastName) {
+	public PersonBuilder lastName(String lastName) {
 		this.lastName = lastName;
 		return this;
 	}
 
-	public UserBuilder createdDate(Date createdDate) {
+	public PersonBuilder createdDate(Date createdDate) {
 		this.createdDate = createdDate;
 		return this;
 	}
 
-	public UserBuilder lastAccessed(Date lastAccessed) {
+	public PersonBuilder lastAccessed(Date lastAccessed) {
 		this.lastAccessed = lastAccessed;
 		return this;
 	}
 
-	public UserBuilder isActive(Boolean isActive) {
+	public PersonBuilder isActive(Boolean isActive) {
 		this.isActive = isActive;
 		return this;
 	}
 
-	public User build() {
-		return new User(this);
+	public Person build() {
+		return new Person(this);
 	}
 }
